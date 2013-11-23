@@ -17,9 +17,12 @@ import java.util.ArrayList;
 public class SujetDiscussion extends UnicastRemoteObject  implements InterfaceSujetDiscussion{
     String sujet;
     ArrayList<InterfaceAffichageClient> clients;
-    public SujetDiscussion(String sujet) throws RemoteException{
-        this.sujet=sujet;
+    public SujetDiscussion() throws RemoteException{
+        
         clients=new ArrayList();
+    }
+    public void CreerSujetDiscussion(String sujet) throws RemoteException{
+        this.sujet=sujet;
     }
     @Override
     public void inscription(InterfaceAffichageClient c) throws RemoteException {

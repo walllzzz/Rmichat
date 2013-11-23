@@ -24,16 +24,12 @@ public class ServeurForum extends UnicastRemoteObject implements InterfaceServeu
     ArrayList<InterfaceSujetDiscussion> sujets;
     public ServeurForum() throws RemoteException{
         sujets=new ArrayList();
-        addSujetDiscussion("books");
+        //addSujetDiscussion("books");
     }
-    private void addSujetDiscussion(String titre){
-        SujetDiscussion sujet;
-        try {
-            sujet = new SujetDiscussion(titre);
-             sujets.add(sujet);
-        } catch (RemoteException ex) {
-            Logger.getLogger(ServeurForum.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    @Override
+    public void addSujetDiscussion(InterfaceSujetDiscussion sujet){
+        sujets.add(sujet);
+       
        
     }
     @Override

@@ -12,5 +12,6 @@ import java.rmi.RemoteException;
  * @author mon pc
  */
 public interface InterfaceServeurForum extends Remote {
+    public void addSujetDiscussion(InterfaceSujetDiscussion sujet) throws RemoteException;
     public InterfaceSujetDiscussion obtientSujet(String titre) throws RemoteException;
 } 
