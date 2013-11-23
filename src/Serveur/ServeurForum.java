@@ -12,6 +12,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,11 +24,22 @@ public class ServeurForum extends UnicastRemoteObject implements InterfaceServeu
     ArrayList<InterfaceSujetDiscussion> sujets;
     public ServeurForum() throws RemoteException{
         sujets=new ArrayList();
+        addSujetDiscussion("books");
     }
-    
+    private void addSujetDiscussion(String titre){
+        SujetDiscussion sujet;
+        try {
+            sujet = new SujetDiscussion(titre);
+             sujets.add(sujet);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ServeurForum.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
     @Override
     public InterfaceSujetDiscussion obtientSujet(String titre) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sujets.get(0);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
@@ -37,7 +50,8 @@ public class ServeurForum extends UnicastRemoteObject implements InterfaceServeu
       // creation du serveur de forum et enregistrement sur le reseau
       LocateRegistry.createRegistry(8686);
       InterfaceServeurForum server = new ServeurForum();
-      String URL="localhost";
+     
+      String URL="//localhost:8686/RmiServer";
       Naming.bind(URL, server);
       System.out.println("Démarrage du serveur...");
 

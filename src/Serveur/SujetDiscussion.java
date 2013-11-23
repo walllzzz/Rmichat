@@ -7,15 +7,20 @@ package Serveur;
 import Commun.InterfaceAffichageClient;
 import Commun.InterfaceSujetDiscussion;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
  *
  * @author mon pc
  */
-public class SujetDiscussion implements InterfaceSujetDiscussion{
+public class SujetDiscussion extends UnicastRemoteObject  implements InterfaceSujetDiscussion{
     String sujet;
     ArrayList<InterfaceAffichageClient> clients;
+    public SujetDiscussion(String sujet) throws RemoteException{
+        this.sujet=sujet;
+        clients=new ArrayList();
+    }
     @Override
     public void inscription(InterfaceAffichageClient c) throws RemoteException {
         clients.add(c);
@@ -30,7 +35,10 @@ public class SujetDiscussion implements InterfaceSujetDiscussion{
 
     @Override
     public void diffuse(String message) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(InterfaceAffichageClient client:clients){
+            client.affiche(message);
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
