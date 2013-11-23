@@ -4,10 +4,13 @@
  */
 package Commun;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author mon pc
  */
-public class InterfaceAffichageClient {
-    
+public interface InterfaceAffichageClient extends Remote {
+    public void affiche(String message) throws RemoteException;
 }

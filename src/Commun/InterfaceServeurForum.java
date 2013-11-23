@@ -4,10 +4,13 @@
  */
 package Commun;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author mon pc
  */
-public class InterfaceServeurForum {
-    
-}
+public interface InterfaceServeurForum extends Remote {
+    public InterfaceSujetDiscussion obtientSujet(String titre) throws RemoteException;
+} 
