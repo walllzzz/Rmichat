@@ -43,5 +43,7 @@ public class SujetDiscussion extends UnicastRemoteObject  implements InterfaceSu
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    public String getSujet() throws RemoteException{
+        return sujet;
+    }
 }

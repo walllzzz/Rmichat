@@ -12,6 +12,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -22,12 +23,15 @@ import javax.swing.JOptionPane;
  * @author mon pc
  */
 public class AffichageClient extends UnicastRemoteObject implements InterfaceAffichageClient{
-    public AffichageClient() throws RemoteException{
-        
+    
+    FenetreChat fenetreChat;
+    public AffichageClient(InterfaceSujetDiscussion sujet) throws RemoteException{
+        fenetreChat=new FenetreChat(sujet);
     }
     @Override
     public void affiche(String message) throws RemoteException {
         System.out.println("message: "+message);
+        this.fenetreChat.afficherMessage(message);
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
  private static InterfaceServeurForum getServer() {
@@ -52,15 +56,19 @@ public class AffichageClient extends UnicastRemoteObject implements InterfaceAff
     return server;
   }
     public static void main(String args[]) {
-        String name = "coucou";
-   
-        try {
-             AffichageClient client=new AffichageClient();
+            String name = "coucou";       
+            ChoisirSujetGUI csj;
+            InterfaceServeurForum server = getServer();
+            InterfaceSujetDiscussion[] sujets=null;
+            csj=new ChoisirSujetGUI(server);
+            csj.show();
+           /*  AffichageClient client=new AffichageClient(sujet);
             InterfaceServeurForum server = client.getServer();
+            
             InterfaceSujetDiscussion sujet=server.obtientSujet("books");
             sujet.inscription(client);
             System.out.println("message diffuser");
-            sujet.diffuse("coucou");
+            sujet.diffuse("coucou");*/
             
             /*if (server != null) {
                 
@@ -73,9 +81,7 @@ public class AffichageClient extends UnicastRemoteObject implements InterfaceAff
                 System.exit(0);
               }
             }*/
-        } catch (RemoteException ex) {
-            Logger.getLogger(AffichageClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
   }
     
 }

@@ -38,9 +38,6 @@ public class ServeurForum extends UnicastRemoteObject implements InterfaceServeu
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
-    
-    
     public static void main(String args[]) {
     try {
       // creation du serveur de forum et enregistrement sur le reseau
@@ -60,6 +57,11 @@ public class ServeurForum extends UnicastRemoteObject implements InterfaceServeu
       e.printStackTrace();
     }
   }
+
+    @Override
+    public InterfaceSujetDiscussion[] getSujets() {        
+        return sujets.toArray(new InterfaceSujetDiscussion[sujets.size()]); //To change body of generated methods, choose Tools | Templates.
+    }
 
   
 }
