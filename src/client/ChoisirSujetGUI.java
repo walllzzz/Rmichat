@@ -38,7 +38,7 @@ public class ChoisirSujetGUI extends JFrame{
         panel=new JPanel();
         list = new JList();
         list.setModel(model);
-       // getSujet();
+        getSujet();
          //data has type Object[]
         
         miseAjour=new JButton("mise A jour de la liste");

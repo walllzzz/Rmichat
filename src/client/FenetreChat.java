@@ -4,6 +4,7 @@
  */
 package client;
 
+import Commun.InterfaceAffichageClient;
 import Commun.InterfaceSujetDiscussion;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -31,9 +32,11 @@ public class FenetreChat extends JFrame{
     JButton envoyer;
     JButton desinscription;
     InterfaceSujetDiscussion sujet;
-    public FenetreChat(InterfaceSujetDiscussion sujet){
+    InterfaceAffichageClient client;
+    public FenetreChat(InterfaceSujetDiscussion sujet,InterfaceAffichageClient client){
          super();
         panel=new JPanel();
+        this.client=client;
         this.sujet=sujet;
         textArea = new JTextArea(); //data has type Object[]
         envoyer=new JButton("envoyer");
@@ -44,6 +47,12 @@ public class FenetreChat extends JFrame{
 	            }
 	        });
         desinscription=new JButton("DesInscription");
+        desinscription.addActionListener(new ActionListener() {			  
+	            public void actionPerformed(ActionEvent e)
+	            {
+                        desinscription();                        
+	            }
+	        });
         message=new JTextField(40);
         JScrollPane listScroller = new JScrollPane(textArea);
         listScroller.setPreferredSize(new Dimension(350, 300));
@@ -58,6 +67,15 @@ public class FenetreChat extends JFrame{
     public void envoyerMessage(){
         try {
             sujet.diffuse(message.getText());
+           
+        } catch (RemoteException ex) {
+            Logger.getLogger(FenetreChat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     public void desinscription(){
+        try {
+            sujet.desincription(client);
+           
         } catch (RemoteException ex) {
             Logger.getLogger(FenetreChat.class.getName()).log(Level.SEVERE, null, ex);
         }

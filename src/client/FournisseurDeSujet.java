@@ -46,10 +46,12 @@ public class FournisseurDeSujet {
         String name = "coucou";
    
         try {
-             FournisseurDeSujet fournisseur=new FournisseurDeSujet();
+            String  sujet = JOptionPane.showInputDialog(null,"Saississez le titre de sujet", "Sujet");
+            FournisseurDeSujet fournisseur=new FournisseurDeSujet();
             InterfaceServeurForum server = fournisseur.getServer();
             SujetDiscussion subject = new SujetDiscussion();
-            subject.CreerSujetDiscussion("cine");
+          
+            subject.CreerSujetDiscussion(sujet);
             server.addSujetDiscussion(subject);
       // subject creation
      // server.createSubject(subject);

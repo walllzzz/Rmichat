@@ -26,7 +26,7 @@ public class AffichageClient extends UnicastRemoteObject implements InterfaceAff
     
     FenetreChat fenetreChat;
     public AffichageClient(InterfaceSujetDiscussion sujet) throws RemoteException{
-        fenetreChat=new FenetreChat(sujet);
+        fenetreChat=new FenetreChat(sujet,this);
     }
     @Override
     public void affiche(String message) throws RemoteException {
@@ -56,7 +56,7 @@ public class AffichageClient extends UnicastRemoteObject implements InterfaceAff
     return server;
   }
     public static void main(String args[]) {
-            String name = "coucou";       
+                 
             ChoisirSujetGUI csj;
             InterfaceServeurForum server = getServer();
             InterfaceSujetDiscussion[] sujets=null;
